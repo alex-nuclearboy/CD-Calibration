@@ -31,6 +31,14 @@
 *.out
 *.app
 
+# Compiled files
+main
+mainDict*
+mainDict.*
+
+# Scripts & Log files
+analysis-run-*
+
 # Input & Output files
 *.root
 *.png
@@ -39,3 +47,4 @@
 *.ps
 *.dat
 *.txt
+
