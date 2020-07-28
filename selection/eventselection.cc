@@ -100,6 +100,10 @@ void eventselection::ProcessEvent() {    //01//
 
 //////////////////////////////////////RECONSTRUCTED EVENTS//////////////////////////////////////
 
+    ///////TRIGGER///////
+
+    if (!(fHeader->TriggerNumSet(10)))  return; //trigger #10
+
     //
     Int_t NumNeutTrackCD = fCDTrackBank->GetEntries(11);    //Neutral Tracks in CD have Type 11
     Int_t NumCharTrackCD = fCDTrackBank->GetEntries(12);    //Charged Tracks in CD have Type 12
@@ -108,14 +112,6 @@ void eventselection::ProcessEvent() {    //01//
     hNeutralTracksCD[0]->Fill(NumNeutTrackCD);
     hChargedTracksCD[0]->Fill(NumCharTrackCD);
     hChargedTracksFD[0]->Fill(NumCharTrackFD);
-
-    ///////TRIGGER///////
-
-    if (!(fHeader->TriggerNumSet(10)))  return; //trigger #10
-
-    hNeutralTracksCD[1]->Fill(NumNeutTrackCD);
-    hChargedTracksCD[1]->Fill(NumCharTrackCD);
-    hChargedTracksFD[1]->Fill(NumCharTrackFD);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -203,7 +199,7 @@ void eventselection::ProcessEvent() {    //01//
         //Invariant and Missing Masses in CM//
         InvariantMass = (P_g[0] + P_g[1]).M();
 
-        hIM_pion[1]->Fill(InvariantMass);
+        hIM_pion[0]->Fill(InvariantMass);
 
     }
 
@@ -211,11 +207,11 @@ void eventselection::ProcessEvent() {    //01//
 
     if ( (NumCharTrackFD >= 1) && (NumNeutTrackCD == 2) ) {
 
-        hNeutralTracksCD[2]->Fill(NumNeutTrackCD);
-        hChargedTracksCD[2]->Fill(NumCharTrackCD);
-        hChargedTracksFD[2]->Fill(NumCharTrackFD);
+        hNeutralTracksCD[1]->Fill(NumNeutTrackCD);
+        hChargedTracksCD[1]->Fill(NumCharTrackCD);
+        hChargedTracksFD[1]->Fill(NumCharTrackFD);
 
-        hIM_pion[2]->Fill(InvariantMass);
+        hIM_pion[1]->Fill(InvariantMass);
 
     }
 
@@ -230,7 +226,7 @@ void eventselection::SetupSpectra(const char * lpath) {   //02//
     TString hpath1 = "Tracks";
     TString hpath2 = "InvariantMass";
 
-    for (Int_t i = 0; i < 3; i++) {
+    for (Int_t i = 0; i < 2; i++) {
 
         hNeutralTracksCD[i] = new TH1F(Form("hNeutralTracksCD_lev%d",i),"",11,-0.5,10.5);
         hNeutralTracksCD[i]->GetXaxis()->SetTitle("Neutral Tracks in CD");
@@ -249,7 +245,7 @@ void eventselection::SetupSpectra(const char * lpath) {   //02//
 
     }
 
-    for (Int_t j = 1; j < 3; j++) {
+    for (Int_t j = 0; j < 2; j++) {
         hIM_pion[j] = new TH1F(Form("hIM_pion_lev%d",j),"",1000,0.,0.4);
         hIM_pion[j]->GetXaxis()->SetTitle("m_{#gamma_{1}#gamma_{2}} [GeV]");
         hIM_pion[j]->GetYaxis()->SetTitle("counts");
