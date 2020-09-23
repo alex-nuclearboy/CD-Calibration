@@ -98,7 +98,7 @@ void InvariantMass_fit() {
 
     TFile *myFile[3];
 
-    myFile[0] = new TFile("input/DATA-SEC_calibration.root","READ");
+    myFile[0] = new TFile("input/DATA-SEC_calibration-corr-run-463.root","READ");
     myFile[1] = new TFile("input/MC-newcuts-AddGammaCut-pd-bound-pdpi0.root","READ");
     myFile[2] = new TFile("input/MC-newcuts-AddGammaCut-pd-pdpi0.root","READ");
 
@@ -106,7 +106,7 @@ void InvariantMass_fit() {
     TH1D* hInvariantMass_fit = new TH1D();
     TH1D* hInvariantMass_signal = new TH1D();
 
-    hInvariantMass[0] = (TH1D*)myFile[0]->Get("Histograms/InvariantMass/hIM_pion_lev2");
+    hInvariantMass[0] = (TH1D*)myFile[0]->Get("Histograms/InvariantMass/hIM_pion_lev1");
     hInvariantMass[1] = (TH1D*)myFile[1]->Get("Histograms/DATA_lev2_cut0/hIM_pion_lev2_cut0");
     hInvariantMass[2] = (TH1D*)myFile[2]->Get("Histograms/DATA_lev2_cut0/hIM_pion_lev2_cut0");
 
@@ -244,7 +244,7 @@ void InvariantMass_fit() {
 
     TCanvas* MyCanvas01 = new TCanvas; //create Canvas
 
-    Double_t Ymax01 = 1.2*hInvariantMass[0]->GetMaximum();
+    Double_t Ymax01 = 1.15*hInvariantMass[0]->GetMaximum();
     Double_t scale010 = (hInvariantMass[0]->GetMaximum())/(hInvariantMass[1]->GetMaximum());
     Double_t scale011 = (hInvariantMass[0]->GetMaximum())/(hInvariantMass[2]->GetMaximum());
 
@@ -283,7 +283,7 @@ void InvariantMass_fit() {
 
     hInvariantMass_signal->SetLineColor(kOrange+1);
     hInvariantMass_signal->SetLineWidth(2);
-    hInvariantMass_signal->GetXaxis()->SetRangeUser(0.05,0.2);
+    hInvariantMass_signal->GetXaxis()->SetRangeUser(0.07,0.2);
     hInvariantMass_signal->Draw("same C");
 
     //pi0 mass
@@ -317,8 +317,8 @@ void InvariantMass_fit() {
 
     MyLegend01->Draw("same");
 
-    MyCanvas01->Print("InvariantMass_fit.png","png");
-    MyCanvas01->Print("InvariantMass_fit.eps","eps");
+    MyCanvas01->Print("hInvariantMass_fit.png","png");
+    MyCanvas01->Print("hInvariantMass_fit.eps","eps");
 
     TCanvas* MyCanvas02 = new TCanvas; //create Canvas
 
@@ -350,7 +350,7 @@ void InvariantMass_fit() {
 
     MyLegend02->Draw();
 
-    MyCanvas02->Print("InvariantMass_fit_pl.png","png");
-    MyCanvas02->Print("InvariantMass_fit_pl.eps","eps");
+    MyCanvas02->Print("hInvariantMass_fit_pl.png","png");
+    MyCanvas02->Print("hInvariantMass_fit_pl.eps","eps");
 
 }
