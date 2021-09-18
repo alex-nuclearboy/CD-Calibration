@@ -251,7 +251,7 @@ void InvariantMass_fit() {
     //hInvariantMass[0]->SetTitle("#pi^{0} #rightarrow #gamma #gamma");
     hInvariantMass[0]->SetMarkerStyle(2);
     hInvariantMass[0]->SetMarkerSize(0.7);
-    hInvariantMass[0]->GetXaxis()->SetTitle("m_{#gamma_{1}#gamma_{2}}, GeV/c^{2}");
+    hInvariantMass[0]->GetXaxis()->SetTitle("m_{#gamma_{1}#gamma_{2}} [GeV/c^{2}]");
     hInvariantMass[0]->GetXaxis()->SetTitleSize(0.06);
     hInvariantMass[0]->GetXaxis()->SetTitleOffset(1.0);
     hInvariantMass[0]->GetXaxis()->SetLabelSize(0.05);
@@ -261,6 +261,8 @@ void InvariantMass_fit() {
     hInvariantMass[0]->GetYaxis()->SetLabelSize(0.05);
     hInvariantMass[0]->GetYaxis()->SetRangeUser(0.,Ymax01);
 
+    hInvariantMass[0]->SetMarkerStyle(23);
+    hInvariantMass[0]->SetMarkerSize(0.7);
     hInvariantMass[0]->Draw("E1");
 
     hInvariantMass[1]->SetMarkerStyle(2);
@@ -340,7 +342,7 @@ void InvariantMass_fit() {
     TLegend *MyLegend02 = new TLegend(0.485, 0.540, 0.885, 0.885);
     MyLegend02->SetFillStyle(1001); MyLegend02->SetFillColor(19); MyLegend02->SetLineColor(1); MyLegend02->SetTextSize(0.04); MyLegend02->SetBorderSize(5);
     MyLegend02->AddEntry( hInvariantMass[0], "dane eksperymentalne", "pe");
-    MyLegend02->AddEntry( totalFcn, "funkcja dopasowania", "l");
+    MyLegend02->AddEntry( totalFcn, "dopasowana funkcja", "l");
     MyLegend02->AddEntry( bkgndFcn_end, "\\hbox{wielomian tła}", "l");
     MyLegend02->AddEntry( hInvariantMass_signal, "\\hbox{sygnał}", "l");
     MyLegend02->AddEntry( line011, Form("pik m_{#gamma_{1}#gamma_{2}} = %g GeV/c^{2}",Max_peak_bin_center), "l");
